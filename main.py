@@ -15,6 +15,7 @@ stream = p.open(format=pyaudio.paInt16,
                 rate=fs,
                 output=True)
 
+plt.title('Orignal Audio')
 plt.plot(audio)
 plt.show()
 
@@ -25,17 +26,18 @@ stream.close()
 # Second Audio 5s ---------------------------------------------------
 
 p = pyaudio.PyAudio()
-fs, audio = w.read('5s.wav')
+fs, audio5 = w.read('5s.wav')
 
 stream = p.open(format=pyaudio.paInt16,
                 channels=1,
                 rate=fs,
                 output=True)
 
-plt.plot(audio)
+plt.title('5s trained audio')
+plt.plot(audio5)
 plt.show()
 
-audio_stream = audio.astype(np.int16).tostring()
+audio_stream = audio5.astype(np.int16).tostring()
 stream.write(audio_stream)
 stream.close()
 
@@ -48,7 +50,7 @@ audioQuant = np.round(data/(step)) * step
 de_quantization_tread = audioQuant*step
 
 plt.plot(de_quantization_tread)
-plt.title('Mid Tread uniform quantized audio with quantization nosie ')
+plt.title('        Mid Tread uniform quantized audio with quantization nosie ')
 plt.show()
 
 p = pyaudio.PyAudio()
